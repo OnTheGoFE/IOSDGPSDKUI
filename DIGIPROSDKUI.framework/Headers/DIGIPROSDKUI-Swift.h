@@ -526,6 +526,7 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
 - (void)sendStatusWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error isLog:(BOOL)isLog isNotification:(BOOL)isNotification;
 - (void)sendStatusCompletitionWithInitial:(float)initial current:(float)current final:(float)final;
 - (void)sendStatusCodeMessageWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
+- (void)didSendResponseStatusWithTitle:(NSString * _Nonnull)title subtitle:(NSString * _Nonnull)subtitle porcentage:(float)porcentage;
 - (void)saveWorksheet;
 - (void)viewDidLoad;
 - (void)viewDidAppear:(BOOL)animated;
@@ -550,6 +551,8 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
 @interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <CLLocationManagerDelegate>
 - (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
 @end
+
+
 
 
 
@@ -643,6 +646,19 @@ SWIFT_PROTOCOL("_TtP12DIGIPROSDKUI23PagingTableViewDelegate_")
 - (void)didPaginate:(PagingTableView * _Nonnull)tableView to:(NSInteger)page;
 @required
 - (void)paginate:(PagingTableView * _Nonnull)tableView to:(NSInteger)page;
+@end
+
+
+SWIFT_CLASS("_TtC12DIGIPROSDKUI24RequestSuccessController")
+@interface RequestSuccessController : UIViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)viewDidLoad;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+@interface RequestSuccessController (SWIFT_EXTENSION(DIGIPROSDKUI))
+- (void)saveForm;
 @end
 
 
