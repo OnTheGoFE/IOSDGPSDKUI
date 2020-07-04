@@ -417,6 +417,7 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI18DataViewController")
 - (void)previewAction:(UIButton * _Nonnull)sender;
 - (void)editAction:(UIButton * _Nonnull)sender;
 - (void)helpAction:(UIButton * _Nonnull)sender;
+- (void)transitAction:(UIButton * _Nonnull)sender;
 @end
 
 
