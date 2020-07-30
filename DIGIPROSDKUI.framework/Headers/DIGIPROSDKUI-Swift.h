@@ -639,6 +639,8 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
 
 
 
+
+
 @class CLLocationManager;
 @class CLLocation;
 
@@ -697,10 +699,10 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
 
 
 
-
-
 @interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <APIDelegate>
 @end
+
+
 
 
 
@@ -812,6 +814,15 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI33ResultadosConsultasViewController")
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_CLASS("_TtC12DIGIPROSDKUI27SaveRequestScreenController")
+@interface SaveRequestScreenController : UIViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)loadView;
+- (void)viewDidLoad;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
 @class UIImageView;
