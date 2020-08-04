@@ -825,6 +825,16 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI27SaveRequestScreenController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
+
+@interface SaveRequestScreenController (SWIFT_EXTENSION(DIGIPROSDKUI)) <APIDelegate>
+- (void)sendStatusWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error isLog:(BOOL)isLog isNotification:(BOOL)isNotification;
+- (void)sendStatusCodeMessageWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
+- (void)didSendErrorWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
+- (void)didSendResponseWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
+- (void)didSendResponseHUDWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error porcentage:(NSInteger)porcentage;
+- (void)sendStatusCompletitionWithInitial:(float)initial current:(float)current final:(float)final;
+@end
+
 @class UIImageView;
 @class UISwitch;
 @class NSNotification;
