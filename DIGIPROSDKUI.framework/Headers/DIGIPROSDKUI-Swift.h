@@ -211,7 +211,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@class NSBundle;
 @class NSCoder;
+
+SWIFT_CLASS("_TtC12DIGIPROSDKUI18BugsViewController")
+@interface BugsViewController : UIViewController
+- (void)viewDidLoad;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS("_TtC12DIGIPROSDKUI25CalculadoraCollectionCell")
 @interface CalculadoraCollectionCell : UICollectionViewCell
@@ -227,7 +236,6 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI25CalculadoraCollectionCell")
 @class UITextField;
 @class UIPickerView;
 @class UIView;
-@class NSBundle;
 
 SWIFT_CLASS("_TtC12DIGIPROSDKUI25CalculadoraViewController")
 @interface CalculadoraViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
