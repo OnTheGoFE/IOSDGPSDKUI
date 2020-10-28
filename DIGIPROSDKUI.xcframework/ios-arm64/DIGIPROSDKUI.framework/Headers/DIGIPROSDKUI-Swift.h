@@ -189,9 +189,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreGraphics;
-@import CoreLocation;
 @import DIGIPROSDK;
-@import Eureka;
 @import Foundation;
 @import MapKit;
 @import ObjectiveC;
@@ -288,27 +286,6 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI25CalculadoraViewController")
 @end
 
 @class UILabel;
-@class UIButton;
-
-SWIFT_CLASS("_TtC12DIGIPROSDKUI27ConsultasFormViewController")
-@interface ConsultasFormViewController : FormViewController <APIDelegate>
-- (void)sendStatusWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error isLog:(BOOL)isLog isNotification:(BOOL)isNotification;
-- (void)sendStatusCompletitionWithInitial:(float)initial current:(float)current final:(float)final;
-- (void)sendStatusCodeMessageWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendErrorWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendResponseWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendResponseHUDWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error porcentage:(NSInteger)porcentage;
-@property (nonatomic, strong) IBOutlet UILabel * _Null_unspecified titleLabel;
-@property (nonatomic, strong) IBOutlet UIButton * _Null_unspecified backButton;
-- (void)viewDidLoad;
-- (void)viewDidAppear:(BOOL)animated;
-- (void)didReceiveMemoryWarning;
-- (void)viewWillAppear:(BOOL)animated;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
 
 SWIFT_CLASS("_TtC12DIGIPROSDKUI23ConsultasViewController")
 @interface ConsultasViewController : UIViewController <APIDelegate, UINavigationControllerDelegate>
@@ -358,11 +335,13 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI25DangerAlertViewController")
 @end
 
 
+@class UIButton;
 
 SWIFT_CLASS("_TtC12DIGIPROSDKUI18DataViewController")
 @interface DataViewController : UIViewController <UNUserNotificationCenterDelegate>
 @property (nonatomic, strong) IBOutlet UIButton * _Null_unspecified btnFlujos;
 - (void)viewDidLoad;
+- (void)viewDidAppear:(BOOL)animated;
 - (void)didReceiveMemoryWarning;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -507,21 +486,6 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI19FlujoViewController")
 @end
 
 
-SWIFT_CLASS("_TtC12DIGIPROSDKUI20FooterViewController")
-@interface FooterViewController : FormViewController <APIDelegate>
-- (void)sendStatusWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error isLog:(BOOL)isLog isNotification:(BOOL)isNotification;
-- (void)sendStatusCompletitionWithInitial:(float)initial current:(float)current final:(float)final;
-- (void)sendStatusCodeMessageWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendErrorWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendResponseWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendResponseHUDWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error porcentage:(NSInteger)porcentage;
-- (void)viewDidLoad;
-- (void)didReceiveMemoryWarning;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
 SWIFT_CLASS("_TtC12DIGIPROSDKUI17FormatoGoogleView")
 @interface FormatoGoogleView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
@@ -543,14 +507,6 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI17LocalDataCellView")
 @interface LocalDataCellView : UITableViewCell
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC12DIGIPROSDKUI19ModalViewController")
-@interface ModalViewController : FormViewController <UINavigationControllerDelegate>
-- (void)viewDidLoad;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -611,66 +567,6 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI27NotificationsViewController")
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (UISwipeActionsConfiguration * _Nullable)tableView:(UITableView * _Nonnull)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 @end
-
-@class UIPopoverPresentationController;
-@class UIPresentationController;
-@class CLLocationManager;
-@class CLLocation;
-
-SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
-@interface NuevaPlantillaViewController : FormViewController <CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate>
-@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified btnTopView;
-@property (nonatomic, weak) IBOutlet UIButton * _Nullable btnBack;
-- (void)didSendToServerFormatos;
-- (void)didSendErrorWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendResponseWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendResponseHUDWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error porcentage:(NSInteger)porcentage;
-- (void)sendStatusWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error isLog:(BOOL)isLog isNotification:(BOOL)isNotification;
-- (void)sendStatusCompletitionWithInitial:(float)initial current:(float)current final:(float)final;
-- (void)sendStatusCodeMessageWithMessage:(NSString * _Nonnull)message error:(enum enumErrorType)error;
-- (void)didSendResponseStatusWithTitle:(NSString * _Nonnull)title subtitle:(NSString * _Nonnull)subtitle porcentage:(float)porcentage;
-- (void)saveWorksheet;
-- (void)viewDidLoad;
-- (void)viewDidAppear:(BOOL)animated;
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)didReceiveMemoryWarning;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
-- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController * _Nonnull)popoverPresentationController SWIFT_WARN_UNUSED_RESULT;
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController * _Nonnull)controller SWIFT_WARN_UNUSED_RESULT;
-- (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
-- (void)searchBarSearchButtonClicked:(UISearchBar * _Nonnull)searchBar;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <APIDelegate>
-@end
-
-
 
 
 SWIFT_CLASS("_TtC12DIGIPROSDKUI21NuevoFEViewController")

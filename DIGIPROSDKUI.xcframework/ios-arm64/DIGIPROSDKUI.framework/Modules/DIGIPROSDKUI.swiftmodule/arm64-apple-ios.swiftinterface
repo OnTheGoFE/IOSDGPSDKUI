@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name DIGIPROSDKUI
+import CommonCrypto
 import CoreLocation
 import DIGIPROSDK
 import DIGIPROSDKATO
@@ -30,6 +31,7 @@ import WebKit
   @objc @IBOutlet public var btnFlujos: UIKit.UIButton!
   public func performNuevaPlantilla(_ navigation: UIKit.UINavigationController)
   @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func didReceiveMemoryWarning()
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
@@ -136,11 +138,11 @@ public protocol NuevaPlantillaViewControllerDelegate {
   func reloadContEstatico()
 }
 public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
-@objc @_inheritsConvenienceInitializers public class NuevaPlantillaViewController : Eureka.FormViewController, DIGIPROSDK.FormularioDelegate, UIKit.UIGestureRecognizerDelegate, DIGIPROSDKUI.NuevaPlantillaViewControllerDelegate, UIKit.UIPopoverPresentationControllerDelegate, CoreLocation.CLLocationManagerDelegate, UIKit.UISearchBarDelegate {
+@_inheritsConvenienceInitializers public class NuevaPlantillaViewController : Eureka.FormViewController, DIGIPROSDK.FormularioDelegate, UIKit.UIGestureRecognizerDelegate, DIGIPROSDKUI.NuevaPlantillaViewControllerDelegate, UIKit.UIPopoverPresentationControllerDelegate, CoreLocation.CLLocationManagerDelegate, UIKit.UISearchBarDelegate {
   public var completionBlockLocalBiometric: DIGIPROSDKUI.BackFromSuccessBiometricLocal?
   public var formActions: DIGIPROSDK.FormManager<DIGIPROSDKUI.NuevaPlantillaViewController>?
   public var sdkAPI: DIGIPROSDK.APIManager<DIGIPROSDKUI.NuevaPlantillaViewController>?
-  public var navigation: UIKit.UINavigationController?
+  public var navigation: Eureka.FormViewController?
   public var elementsForValidate: [Swift.String]
   public var ElementosArray: Foundation.NSMutableDictionary
   public var valuesArray: Swift.Array<Swift.String>?
@@ -187,6 +189,7 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   final public let locationManager: CoreLocation.CLLocationManager
   public var wrdNavigation: DIGIPROSDKSO.WizardRow?
   public var valueRuleCoor: Swift.String
+  public var combosPend: [Swift.String : Swift.String]
   public var flagCot: Swift.Bool
   public var flagBio: Swift.Bool
   final public let warningView: UIKit.UIImageView
@@ -238,6 +241,7 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   public func reloadElementsByAction(_ index: Swift.Int)
   public func reloadContEstatico()
   public func setCoordinates()
+  public func getRowByIdInAllForms(_ id: Swift.String) -> (element: DIGIPROSDK.TipoElemento, row: Eureka.BaseRow?)
   public func getElementByIdInAllForms(_ id: Swift.String) -> Eureka.BaseRow?
   public func getSectionByIdInCurrentForm(_ id: Swift.String) -> Eureka.Section?
   public func getElementByIdInCurrentForm(_ id: Swift.String) -> Eureka.BaseRow?
@@ -250,10 +254,10 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   @objc public func adaptivePresentationStyle(for controller: UIKit.UIPresentationController) -> UIKit.UIModalPresentationStyle
   @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
   @objc public func searchBarSearchButtonClicked(_ searchBar: UIKit.UISearchBar)
-  @objc deinit
   override public init(style: UIKit.UITableView.Style)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
 }
 extension NuevaPlantillaViewController : DIGIPROSDK.APIDelegate {
   public func openForm(tipoDoc: Swift.Int, expId: Swift.Int, flujoId: Swift.Int, piid: Swift.Int, guid: Swift.String)
@@ -305,8 +309,8 @@ public typealias ToggleAcept = (Foundation.NSString) -> ()
   public var titlePage: Swift.String
   @objc override dynamic public func loadView()
   @objc override dynamic public func viewDidLoad()
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
 }
 extension SaveRequestScreenController : DIGIPROSDK.APIDelegate {
   @objc dynamic public func sendStatus(message: Swift.String, error: DIGIPROSDK.enumErrorType, isLog: Swift.Bool, isNotification: Swift.Bool)
@@ -340,7 +344,8 @@ extension NuevaPlantillaViewController {
   public func getStaticElements() -> [(title: Swift.String, value: Swift.String)]
   public func getValuesJson(_ jsonString: Swift.String = "")
   public func getFormViewControllerDelegate() -> Eureka.FormViewController?
-  public func getNavigationController() -> UIKit.UINavigationController?
+  public func getNestedForm() -> Eureka.FormViewController?
+  public func setNestedForm(_ nav: Eureka.FormViewController?)
 }
 extension NuevaPlantillaViewController {
   public func setNotificationBanner(_ title: Swift.String, _ subtitle: Swift.String, _ style: DIGIPROSDK.BannerStyle, _ color: UIKit.UIColor?, _ text: UIKit.UIColor?)
@@ -409,7 +414,7 @@ extension RequestSuccessController {
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
-@objc @_inheritsConvenienceInitializers public class FooterViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
+@_inheritsConvenienceInitializers public class FooterViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
   @objc public func sendStatus(message: Swift.String, error: DIGIPROSDK.enumErrorType, isLog: Swift.Bool, isNotification: Swift.Bool)
   @objc public func sendStatusCompletition(initial: Swift.Float, current: Swift.Float, final: Swift.Float)
   @objc public func sendStatusCodeMessage(message: Swift.String, error: DIGIPROSDK.enumErrorType)
@@ -495,7 +500,7 @@ extension NuevaPlantillaViewController {
   public func resolveVisible(_ id: Swift.String, _ mode: Swift.String, _ string: Swift.String) -> Swift.Bool
   public func resolveVisibleContenido(_ id: Swift.String, _ mode: Swift.String, _ string: Swift.String) -> Swift.Bool
 }
-@objc @_inheritsConvenienceInitializers public class ModalViewController : Eureka.FormViewController, Eureka.TypedRowControllerType, UIKit.UINavigationControllerDelegate {
+@_inheritsConvenienceInitializers public class ModalViewController : Eureka.FormViewController, Eureka.TypedRowControllerType, UIKit.UINavigationControllerDelegate {
   public var row: Eureka.RowOf<Swift.String>!
   public var onDismissCallback: ((UIKit.UIViewController) -> ())?
   public func initForm(_ form: Eureka.Form, _ delegate: DIGIPROSDKUI.NuevaPlantillaViewController)
@@ -595,7 +600,9 @@ extension NuevaPlantillaViewController {
   public func valueElementRow(_ idElem: Swift.String) -> Swift.String
   public func valueVarUsr(_ varUsr: Swift.String) -> Swift.String
   public func valueByType(_ subject: DIGIPROSDK.AEXMLElement, _ elementsRow: Foundation.NSMutableDictionary? = nil) -> Swift.String
-  public func valueMetaElementRow(_ idElem: Swift.String) -> Swift.String
+  public func valueMetaElementRow(_ idElem: Swift.String, _ isCombo: Swift.String? = nil) -> Swift.String
+  public func updateDataComboDinamico(idsCombo: [Swift.String])
+  public func isfilter(idElement: Swift.String) -> Swift.String
 }
 @objc @_inheritsConvenienceInitializers public class NotificationsCellController : UIKit.UITableViewCell {
   @objc deinit
@@ -621,7 +628,7 @@ extension EstaticosViewController : UIKit.UITableViewDelegate, UIKit.UITableView
   @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
   @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGFloat
 }
-@objc @_inheritsConvenienceInitializers public class ConsultasFormViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
+@_inheritsConvenienceInitializers public class ConsultasFormViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
   @objc public func sendStatus(message: Swift.String, error: DIGIPROSDK.enumErrorType, isLog: Swift.Bool, isNotification: Swift.Bool)
   @objc public func sendStatusCompletition(initial: Swift.Float, current: Swift.Float, final: Swift.Float)
   @objc public func sendStatusCodeMessage(message: Swift.String, error: DIGIPROSDK.enumErrorType)
@@ -796,6 +803,17 @@ extension DebugFormViewController : UIKit.UISearchBarDelegate {
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+public enum RowAction : Swift.String {
+  case value
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class UnknownClass {
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class NewFirstViewController : UIKit.UIViewController, UIKit.UIApplicationDelegate, UserNotifications.UNUserNotificationCenterDelegate {
   @objc override dynamic public func viewDidLoad()
