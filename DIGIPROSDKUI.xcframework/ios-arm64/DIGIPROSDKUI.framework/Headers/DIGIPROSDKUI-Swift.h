@@ -347,6 +347,11 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI18DataViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSError;
+
+@interface DataViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <TemplateDelegate>
+- (void)didFormatViewFinishWithError:(NSError * _Nullable)error success:(NSDictionary<NSString *, id> * _Nullable)success;
+@end
 
 @class UISearchBar;
 

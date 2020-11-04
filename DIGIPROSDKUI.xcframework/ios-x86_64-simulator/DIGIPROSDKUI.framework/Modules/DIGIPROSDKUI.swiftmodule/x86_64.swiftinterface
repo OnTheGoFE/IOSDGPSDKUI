@@ -65,7 +65,7 @@ extension DataViewController : UIKit.UISearchBarDelegate {
   @objc dynamic public func searchBarSearchButtonClicked(_ searchBar: UIKit.UISearchBar)
 }
 extension DataViewController : DIGIPROSDK.TemplateDelegate {
-  public func didFormatViewFinish(error: Foundation.NSError?, success: [Swift.String : Any]?)
+  @objc dynamic public func didFormatViewFinish(error: Foundation.NSError?, success: [Swift.String : Any]?)
 }
 extension DataViewController : DIGIPROSDK.APIDelegate {
   @objc dynamic public func didFormatoTransited(index: ObjectiveC.NSInteger, formato: DIGIPROSDK.FEFormatoData, isInEdition: Swift.Bool)
