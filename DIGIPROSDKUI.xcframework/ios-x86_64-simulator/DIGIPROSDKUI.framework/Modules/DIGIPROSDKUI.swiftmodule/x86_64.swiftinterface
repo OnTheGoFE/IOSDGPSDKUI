@@ -238,6 +238,7 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
   @objc override dynamic public func didReceiveMemoryWarning()
   public func initForm()
+  public func reloadContentCombos(_ index: Swift.Int)
   public func reloadElementsByAction(_ index: Swift.Int)
   public func reloadContEstatico()
   public func setCoordinates()
@@ -600,8 +601,8 @@ extension NuevaPlantillaViewController {
   public func valueElementRow(_ idElem: Swift.String) -> Swift.String
   public func valueVarUsr(_ varUsr: Swift.String) -> Swift.String
   public func valueByType(_ subject: DIGIPROSDK.AEXMLElement, _ elementsRow: Foundation.NSMutableDictionary? = nil) -> Swift.String
-  public func valueMetaElementRow(_ idElem: Swift.String, _ isCombo: Swift.String? = nil) -> Swift.String
-  public func updateDataComboDinamico(idsCombo: [Swift.String])
+  public func valueMetaElementRow(_ idElem: Swift.String, _ isCombo: Swift.String? = nil) -> (value: Swift.String, row: Eureka.BaseRow)
+  public func updateDataComboDinamico(idsCombo: [(id: Swift.String, row: Eureka.BaseRow)])
   public func isfilter(idElement: Swift.String) -> Swift.String
 }
 @objc @_inheritsConvenienceInitializers public class NotificationsCellController : UIKit.UITableViewCell {
