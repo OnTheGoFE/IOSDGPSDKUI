@@ -11,7 +11,6 @@ import Eureka
 import Foundation
 import LocalAuthentication
 import MapKit
-import Microblink
 import Swift
 import UIKit
 import UserNotifications
@@ -139,10 +138,6 @@ extension NuevaPlantillaViewController {
   public func removeVowels(input: Swift.String) -> Swift.String
   public func actionSheet(_ element: Swift.String)
 }
-extension NuevaPlantillaViewController : Microblink.MBBlinkIdOverlayViewControllerDelegate {
-  @objc dynamic public func blinkIdOverlayViewControllerDidFinishScanning(_ blinkIdOverlayViewController: Microblink.MBBlinkIdOverlayViewController, state: Microblink.MBRecognizerResultState)
-  @objc dynamic public func blinkIdOverlayViewControllerDidTapClose(_ blinkIdOverlayViewController: Microblink.MBBlinkIdOverlayViewController)
-}
 public protocol NuevaPlantillaViewControllerDelegate {
   func reloadContEstatico()
 }
@@ -150,7 +145,6 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
 @objc @_inheritsConvenienceInitializers public class NuevaPlantillaViewController : Eureka.FormViewController, DIGIPROSDK.FormularioDelegate, UIKit.UIGestureRecognizerDelegate, DIGIPROSDKUI.NuevaPlantillaViewControllerDelegate, UIKit.UIPopoverPresentationControllerDelegate, CoreLocation.CLLocationManagerDelegate, UIKit.UISearchBarDelegate {
   public var elemtVDDocument: DIGIPROSDK.AEXMLElement?
   public var completionBlockLocalBiometric: DIGIPROSDKUI.BackFromSuccessBiometricLocal?
-  public var blinkIdRecognizer: Microblink.MBBlinkIdCombinedRecognizer?
   public var formActions: DIGIPROSDK.FormManager<DIGIPROSDKUI.NuevaPlantillaViewController>?
   public var sdkAPI: DIGIPROSDK.APIManager<DIGIPROSDKUI.NuevaPlantillaViewController>?
   public var navigation: Eureka.FormViewController?

@@ -194,7 +194,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import Eureka;
 @import Foundation;
 @import MapKit;
-@import Microblink;
 @import ObjectiveC;
 @import UIKit;
 @import UserNotifications;
@@ -669,20 +668,13 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
 
 
 
-@class MBBlinkIdOverlayViewController;
-
-@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <MBBlinkIdOverlayViewControllerDelegate>
-- (void)blinkIdOverlayViewControllerDidFinishScanning:(MBBlinkIdOverlayViewController * _Nonnull)blinkIdOverlayViewController state:(MBRecognizerResultState)state;
-- (void)blinkIdOverlayViewControllerDidTapClose:(MBBlinkIdOverlayViewController * _Nonnull)blinkIdOverlayViewController;
-@end
 
 
 
-
-@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <VDPhotoSelfieCaptureProtocol>
-- (void)VDPhotoSelfieCaptured:(NSData * _Null_unspecified)photoSelfieData andFace:(NSData * _Null_unspecified)face;
-- (void)VDPhotoSelfieCapturedWithLiveDetection:(NSData * _Null_unspecified)photoSelfieData andFace:(NSData * _Null_unspecified)face;
-- (void)VDPhotoSelfieAllFinished:(BOOL)processFinished;
+@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <VDVideoSelfieCaptureProtocol>
+- (void)VDVideoSelfieCaptured:(NSData * _Null_unspecified)videoSelfieData;
+- (void)VDVideoSelfieCaptured:(NSData * _Null_unspecified)videoSelfieData withProcessInfo:(NSData * _Null_unspecified)processInfo;
+- (void)VDVideoSelfieAllFinished:(BOOL)processFinished;
 @end
 
 @class VDDocument;
@@ -694,10 +686,10 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
 @end
 
 
-@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <VDVideoSelfieCaptureProtocol>
-- (void)VDVideoSelfieCaptured:(NSData * _Null_unspecified)videoSelfieData;
-- (void)VDVideoSelfieCaptured:(NSData * _Null_unspecified)videoSelfieData withProcessInfo:(NSData * _Null_unspecified)processInfo;
-- (void)VDVideoSelfieAllFinished:(BOOL)processFinished;
+@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <VDPhotoSelfieCaptureProtocol>
+- (void)VDPhotoSelfieCaptured:(NSData * _Null_unspecified)photoSelfieData andFace:(NSData * _Null_unspecified)face;
+- (void)VDPhotoSelfieCapturedWithLiveDetection:(NSData * _Null_unspecified)photoSelfieData andFace:(NSData * _Null_unspecified)face;
+- (void)VDPhotoSelfieAllFinished:(BOOL)processFinished;
 @end
 
 

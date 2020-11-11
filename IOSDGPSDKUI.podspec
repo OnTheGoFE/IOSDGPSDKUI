@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'IOSDGPSDKUI'
-  s.version          = '1.27.5.104'
+  s.version          = '1.27.5.105'
   s.summary          = 'IOS SDK DIGIPRO Formatos Electrónicos (User Interface Object)'
   s.description      = <<-DESC
 El User Interface object framework es utilizado para la generación de formatos electrónicos.
