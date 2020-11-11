@@ -11,9 +11,13 @@ import Eureka
 import Foundation
 import LocalAuthentication
 import MapKit
+import Microblink
 import Swift
 import UIKit
 import UserNotifications
+import VDDocumentCapture
+import VDPhotoSelfieCapture
+import VDVideoSelfieCapture
 import WebKit
 @objc @_inheritsConvenienceInitializers public class CalculadoraCollectionCell : UIKit.UICollectionViewCell {
   @objc override dynamic public func awakeFromNib()
@@ -133,13 +137,20 @@ extension NuevaPlantillaViewController {
   public func obtainComponents(_ element: Swift.String)
   public func setOCRDetails(_ service: Swift.Int, _ object: Swift.AnyObject, _ element: Swift.String)
   public func removeVowels(input: Swift.String) -> Swift.String
+  public func actionSheet(_ element: Swift.String)
+}
+extension NuevaPlantillaViewController : Microblink.MBBlinkIdOverlayViewControllerDelegate {
+  @objc dynamic public func blinkIdOverlayViewControllerDidFinishScanning(_ blinkIdOverlayViewController: Microblink.MBBlinkIdOverlayViewController, state: Microblink.MBRecognizerResultState)
+  @objc dynamic public func blinkIdOverlayViewControllerDidTapClose(_ blinkIdOverlayViewController: Microblink.MBBlinkIdOverlayViewController)
 }
 public protocol NuevaPlantillaViewControllerDelegate {
   func reloadContEstatico()
 }
 public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
-@_inheritsConvenienceInitializers public class NuevaPlantillaViewController : Eureka.FormViewController, DIGIPROSDK.FormularioDelegate, UIKit.UIGestureRecognizerDelegate, DIGIPROSDKUI.NuevaPlantillaViewControllerDelegate, UIKit.UIPopoverPresentationControllerDelegate, CoreLocation.CLLocationManagerDelegate, UIKit.UISearchBarDelegate {
+@objc @_inheritsConvenienceInitializers public class NuevaPlantillaViewController : Eureka.FormViewController, DIGIPROSDK.FormularioDelegate, UIKit.UIGestureRecognizerDelegate, DIGIPROSDKUI.NuevaPlantillaViewControllerDelegate, UIKit.UIPopoverPresentationControllerDelegate, CoreLocation.CLLocationManagerDelegate, UIKit.UISearchBarDelegate {
+  public var elemtVDDocument: DIGIPROSDK.AEXMLElement?
   public var completionBlockLocalBiometric: DIGIPROSDKUI.BackFromSuccessBiometricLocal?
+  public var blinkIdRecognizer: Microblink.MBBlinkIdCombinedRecognizer?
   public var formActions: DIGIPROSDK.FormManager<DIGIPROSDKUI.NuevaPlantillaViewController>?
   public var sdkAPI: DIGIPROSDK.APIManager<DIGIPROSDKUI.NuevaPlantillaViewController>?
   public var navigation: Eureka.FormViewController?
@@ -165,6 +176,8 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   public var currentEstadisticas: [DIGIPROSDK.FEEstadistica]
   public var arrayOrder: [Swift.String]
   public var validAnchors: [Swift.String]
+  public var elemMicroblink: Swift.String
+  final public let atributos: DIGIPROSDK.OcrIneObject
   public var isAnexoAdded: Swift.Bool
   public var isAutoEnable: Swift.Bool
   public var plantillamapear: Swift.String
@@ -228,6 +241,7 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   public func nextTask(atributos: DIGIPROSDK.Atributos_wizard? = nil)
   public func saveFormWizard(finalizar: Swift.Bool?, evento: DIGIPROSDK.FEEventosFlujo? = nil, flujo: Swift.Int? = 0, proceso: Swift.Int? = 0, opendatend: Swift.Bool? = false, atributos: DIGIPROSDK.Atributos_wizard? = nil)
   @objc public func saveWorksheet()
+  @objc public func saveWorksheetTable(atributos: DIGIPROSDK.Atributos_wizard? = nil)
   public func wizardValidate(isvalid: Swift.Bool) -> Swift.Bool
   public func deleteFormatFromLocal(formato: DIGIPROSDK.FEFormatoData)
   public convenience init(_ template: DIGIPROSDK.TemplateDelegate, _ plantilla: DIGIPROSDK.FEPlantillaData, _ index: Swift.Int, _ isEdited: Swift.Bool)
@@ -415,7 +429,7 @@ extension RequestSuccessController {
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
-@_inheritsConvenienceInitializers public class FooterViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
+@objc @_inheritsConvenienceInitializers public class FooterViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
   @objc public func sendStatus(message: Swift.String, error: DIGIPROSDK.enumErrorType, isLog: Swift.Bool, isNotification: Swift.Bool)
   @objc public func sendStatusCompletition(initial: Swift.Float, current: Swift.Float, final: Swift.Float)
   @objc public func sendStatusCodeMessage(message: Swift.String, error: DIGIPROSDK.enumErrorType)
@@ -501,7 +515,7 @@ extension NuevaPlantillaViewController {
   public func resolveVisible(_ id: Swift.String, _ mode: Swift.String, _ string: Swift.String) -> Swift.Bool
   public func resolveVisibleContenido(_ id: Swift.String, _ mode: Swift.String, _ string: Swift.String) -> Swift.Bool
 }
-@_inheritsConvenienceInitializers public class ModalViewController : Eureka.FormViewController, Eureka.TypedRowControllerType, UIKit.UINavigationControllerDelegate {
+@objc @_inheritsConvenienceInitializers public class ModalViewController : Eureka.FormViewController, Eureka.TypedRowControllerType, UIKit.UINavigationControllerDelegate {
   public var row: Eureka.RowOf<Swift.String>!
   public var onDismissCallback: ((UIKit.UIViewController) -> ())?
   public func initForm(_ form: Eureka.Form, _ delegate: DIGIPROSDKUI.NuevaPlantillaViewController)
@@ -516,6 +530,21 @@ extension NuevaPlantillaViewController {
 extension NuevaPlantillaViewController {
   public func obtainConcat(_ element: Swift.String)
   public func obtainMathematics(_ element: Swift.String, _ isForced: Swift.Bool? = nil)
+}
+extension NuevaPlantillaViewController : VDDocumentCapture.VDDocumentCaptureProtocol {
+  @objc dynamic public func vdDocumentCaptured(_ imageData: Foundation.Data!, with captureType: VDDocumentCapture.VDCaptureType, andDocument document: [VDDocumentCapture.VDDocument]!)
+  @objc dynamic public func vdDocumentAllFinished(_ processFinished: Swift.Bool)
+  @objc dynamic public func vdTimeWithoutPhotoTaken(_ seconds: Swift.Int32, with capture: VDDocumentCapture.VDCaptureType)
+}
+extension NuevaPlantillaViewController : VDVideoSelfieCapture.VDVideoSelfieCaptureProtocol {
+  @objc dynamic public func vdVideoSelfieCaptured(_ videoSelfieData: Foundation.Data!)
+  @objc dynamic public func vdVideoSelfieCaptured(_ videoSelfieData: Foundation.Data!, withProcessInfo processInfo: Foundation.Data!)
+  @objc dynamic public func vdVideoSelfieAllFinished(_ processFinished: Swift.Bool)
+}
+extension NuevaPlantillaViewController : VDPhotoSelfieCapture.VDPhotoSelfieCaptureProtocol {
+  @objc dynamic public func vdPhotoSelfieCaptured(_ photoSelfieData: Foundation.Data!, andFace face: Foundation.Data!)
+  @objc dynamic public func vdPhotoSelfieCaptured(withLiveDetection photoSelfieData: Foundation.Data!, andFace face: Foundation.Data!)
+  @objc dynamic public func vdPhotoSelfieAllFinished(_ processFinished: Swift.Bool)
 }
 @objc @_hasMissingDesignatedInitializers public class DangerAlertViewController : UIKit.UIViewController {
   @objc override dynamic public func viewDidLoad()
@@ -629,7 +658,7 @@ extension EstaticosViewController : UIKit.UITableViewDelegate, UIKit.UITableView
   @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
   @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGFloat
 }
-@_inheritsConvenienceInitializers public class ConsultasFormViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
+@objc @_inheritsConvenienceInitializers public class ConsultasFormViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
   @objc public func sendStatus(message: Swift.String, error: DIGIPROSDK.enumErrorType, isLog: Swift.Bool, isNotification: Swift.Bool)
   @objc public func sendStatusCompletition(initial: Swift.Float, current: Swift.Float, final: Swift.Float)
   @objc public func sendStatusCodeMessage(message: Swift.String, error: DIGIPROSDK.enumErrorType)
