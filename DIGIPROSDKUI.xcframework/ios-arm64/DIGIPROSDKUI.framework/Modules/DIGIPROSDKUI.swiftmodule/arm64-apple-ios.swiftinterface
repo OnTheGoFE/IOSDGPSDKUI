@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
-// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name DIGIPROSDKUI
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -module-name DIGIPROSDKUI
 import CommonCrypto
 import CoreLocation
 import DIGIPROSDK
@@ -118,7 +118,7 @@ extension NuevaPlantillaViewController {
   @objc @IBOutlet weak public var lineViewTwo: UIKit.UIView!
   public var flag: Swift.Bool
   public var notification: Swift.Bool
-  public static var shared: DIGIPROSDKUI.SecondViewController
+  public static let shared: DIGIPROSDKUI.SecondViewController
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   public func registerForPushNotifications()
@@ -206,7 +206,7 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   public var colorDeseado: UIKit.UIColor
   @objc @IBOutlet weak public var btnBack: UIKit.UIButton? {
     @objc get
-    @objc set(value)
+    @objc set
   }
   @objc public func didSendToServerFormatos()
   public func isVisibleHUD()
@@ -235,8 +235,8 @@ public typealias BackFromSuccessBiometricLocal = (Foundation.NSString) -> ()
   @objc public func saveWorksheetTable(atributos: DIGIPROSDK.Atributos_wizard? = nil)
   public func wizardValidate(isvalid: Swift.Bool) -> Swift.Bool
   public func deleteFormatFromLocal(formato: DIGIPROSDK.FEFormatoData)
-  public convenience init(_ template: DIGIPROSDK.TemplateDelegate, _ plantilla: DIGIPROSDK.FEPlantillaData, _ index: Swift.Int, _ isEdited: Swift.Bool)
-  public convenience init(_ template: DIGIPROSDK.TemplateDelegate, _ formato: DIGIPROSDK.FEFormatoData, _ index: Swift.Int, _ isEdited: Swift.Bool)
+  convenience public init(_ template: DIGIPROSDK.TemplateDelegate, _ plantilla: DIGIPROSDK.FEPlantillaData, _ index: Swift.Int, _ isEdited: Swift.Bool)
+  convenience public init(_ template: DIGIPROSDK.TemplateDelegate, _ formato: DIGIPROSDK.FEFormatoData, _ index: Swift.Int, _ isEdited: Swift.Bool)
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
@@ -315,8 +315,8 @@ public typealias ToggleAcept = (Foundation.NSString) -> ()
   public var titlePage: Swift.String
   @objc override dynamic public func loadView()
   @objc override dynamic public func viewDidLoad()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
 }
 extension SaveRequestScreenController : DIGIPROSDK.APIDelegate {
   @objc dynamic public func sendStatus(message: Swift.String, error: DIGIPROSDK.enumErrorType, isLog: Swift.Bool, isNotification: Swift.Bool)
@@ -376,9 +376,9 @@ extension NuevaPlantillaViewController {
   @objc public func didSendError(message: Swift.String, error: DIGIPROSDK.enumErrorType)
   @objc public func didSendResponse(message: Swift.String, error: DIGIPROSDK.enumErrorType)
   @objc public func didSendResponseHUD(message: Swift.String, error: DIGIPROSDK.enumErrorType, porcentage: Swift.Int)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension RequestSuccessController {
   public func addTargetsButtons()
@@ -416,9 +416,9 @@ extension RequestSuccessController {
   @objc public func tableView(_ tableView: UIKit.UITableView, canEditRowAt indexPath: Foundation.IndexPath) -> Swift.Bool
   @objc public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
   @objc public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGFloat
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class FooterViewController : Eureka.FormViewController, DIGIPROSDK.APIDelegate {
   @objc public func sendStatus(message: Swift.String, error: DIGIPROSDK.enumErrorType, isLog: Swift.Bool, isNotification: Swift.Bool)
@@ -430,10 +430,10 @@ extension RequestSuccessController {
   public var sdkAPI: DIGIPROSDK.APIManager<DIGIPROSDKUI.FooterViewController>?
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func didReceiveMemoryWarning()
-  @objc deinit
   override public init(style: UIKit.UITableView.Style)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
 }
 public protocol TermsConditionsViewControllerDelegate {
   func didTapAccept()
@@ -455,7 +455,7 @@ extension TermsConditionsViewController {
   public func openSettingApp(message: Swift.String)
 }
 @_hasMissingDesignatedInitializers public class CalculadoraManager {
-  public static var shared: DIGIPROSDKUI.CalculadoraManager
+  public static let shared: DIGIPROSDKUI.CalculadoraManager
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class CalculadoraViewController : UIKit.UIViewController, UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegate, UIKit.UIScrollViewDelegate, UIKit.UITextFieldDelegate, UIKit.UIPickerViewDataSource, UIKit.UIPickerViewDelegate {
@@ -538,8 +538,8 @@ public protocol RequestSuccessControllerDelegate {
   public var folioEconsubanco: Swift.String
   public var titlePage: Swift.String
   @objc override dynamic public func viewDidLoad()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class SixViewController : UIKit.UIViewController, UIKit.UIApplicationDelegate {
   @objc override dynamic public func viewDidLoad()
@@ -552,9 +552,9 @@ extension NuevaPlantillaViewController {
 }
 @objc @_inheritsConvenienceInitializers public class FiveViewController : UIKit.UIViewController, UIKit.UIApplicationDelegate {
   @objc override dynamic public func viewDidLoad()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class NuevoFEViewController : UIKit.UIViewController, UIKit.UITableViewDelegate, UIKit.UITableViewDataSource, DIGIPROSDK.APIDelegate {
   public var dataviewDelegate: DIGIPROSDK.ControllerDelegate?
@@ -578,9 +578,9 @@ extension NuevaPlantillaViewController {
   @objc public func tableView(_ tableView: UIKit.UITableView, canEditRowAt indexPath: Foundation.IndexPath) -> Swift.Bool
   @objc public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
   @objc public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreGraphics.CGFloat
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension DataViewController {
   public func detectPermissionNewFormat()
@@ -623,9 +623,9 @@ extension NuevaPlantillaViewController {
   @objc override dynamic public func viewDidLoad()
   @objc public func refresh()
   @objc override dynamic public func didReceiveMemoryWarning()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension EstaticosViewController : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
   @objc dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
@@ -650,19 +650,19 @@ extension EstaticosViewController : UIKit.UITableViewDelegate, UIKit.UITableView
   public func search()
   @objc override dynamic public func didReceiveMemoryWarning()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
-  @objc deinit
   override public init(style: UIKit.UITableView.Style)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class ThirdViewController : UIKit.UIViewController, UIKit.UIApplicationDelegate {
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func didReceiveMemoryWarning()
   @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension NuevaPlantillaViewController {
   public func getSystemParameters(_ sysName: Swift.String) -> [Swift.String : Swift.String]
@@ -735,9 +735,9 @@ extension NotificationsViewController : UIKit.UITableViewDelegate, UIKit.UITable
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func didReceiveMemoryWarning()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension ResultadosConsultasViewController : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
   @objc dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
@@ -770,11 +770,11 @@ extension ResultadosConsultasViewController : DIGIPROSDKUI.PagingTableViewDelega
   }
   weak public var pagingDelegate: DIGIPROSDKUI.PagingTableViewDelegate? {
     get
-    set(value)
+    set
   }
   public var isLoading: Swift.Bool {
     get
-    set(value)
+    set
   }
   public func reset()
   @objc override dynamic public func dequeueReusableCell(withIdentifier identifier: Swift.String, for indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
@@ -790,9 +790,9 @@ extension NuevaPlantillaViewController {
   public var forms: [Eureka.Form]
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func didReceiveMemoryWarning()
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension DebugFormViewController : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
   @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
@@ -824,9 +824,9 @@ public enum RowAction : Swift.String {
 @objc @_inheritsConvenienceInitializers public class NewFirstViewController : UIKit.UIViewController, UIKit.UIApplicationDelegate, UserNotifications.UNUserNotificationCenterDelegate {
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension NewFirstViewController : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
   @objc dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
@@ -858,9 +858,9 @@ extension NuevaPlantillaViewController {
   @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc override dynamic public func didReceiveMemoryWarning()
   @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension ConsultasViewController : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
   @objc dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
@@ -878,3 +878,6 @@ extension ConsultasViewController : DIGIPROSDK.DZNEmptyDataSetSource, DIGIPROSDK
 extension NuevaPlantillaViewController {
   public func resolveRequerido(_ id: Swift.String, _ mode: Swift.String, _ string: Swift.String) -> Swift.Bool
 }
+extension DIGIPROSDKUI.RowAction : Swift.Equatable {}
+extension DIGIPROSDKUI.RowAction : Swift.Hashable {}
+extension DIGIPROSDKUI.RowAction : Swift.RawRepresentable {}
