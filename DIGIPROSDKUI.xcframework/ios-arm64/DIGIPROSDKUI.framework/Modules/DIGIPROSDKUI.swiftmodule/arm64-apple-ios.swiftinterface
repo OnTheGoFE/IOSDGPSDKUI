@@ -14,9 +14,6 @@ import MapKit
 import Swift
 import UIKit
 import UserNotifications
-import VDDocumentCapture
-import VDPhotoSelfieCapture
-import VDVideoSelfieCapture
 import WebKit
 @objc @_inheritsConvenienceInitializers public class CalculadoraCollectionCell : UIKit.UICollectionViewCell {
   @objc override dynamic public func awakeFromNib()
