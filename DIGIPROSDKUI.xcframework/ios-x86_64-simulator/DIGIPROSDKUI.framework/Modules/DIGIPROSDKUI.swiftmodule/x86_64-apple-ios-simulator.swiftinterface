@@ -14,9 +14,6 @@ import MapKit
 import Swift
 import UIKit
 import UserNotifications
-import VDDocumentCapture
-import VDPhotoSelfieCapture
-import VDVideoSelfieCapture
 import WebKit
 @objc @_inheritsConvenienceInitializers public class CalculadoraCollectionCell : UIKit.UICollectionViewCell {
   @objc override dynamic public func awakeFromNib()
@@ -524,21 +521,6 @@ extension NuevaPlantillaViewController {
 extension NuevaPlantillaViewController {
   public func obtainConcat(_ element: Swift.String)
   public func obtainMathematics(_ element: Swift.String, _ isForced: Swift.Bool? = nil)
-}
-extension NuevaPlantillaViewController : VDDocumentCapture.VDDocumentCaptureProtocol {
-  @objc dynamic public func vdDocumentCaptured(_ imageData: Foundation.Data!, with captureType: VDDocumentCapture.VDCaptureType, andDocument document: [VDDocumentCapture.VDDocument]!)
-  @objc dynamic public func vdDocumentAllFinished(_ processFinished: Swift.Bool)
-  @objc dynamic public func vdTimeWithoutPhotoTaken(_ seconds: Swift.Int32, with capture: VDDocumentCapture.VDCaptureType)
-}
-extension NuevaPlantillaViewController : VDVideoSelfieCapture.VDVideoSelfieCaptureProtocol {
-  @objc dynamic public func vdVideoSelfieCaptured(_ videoSelfieData: Foundation.Data!)
-  @objc dynamic public func vdVideoSelfieCaptured(_ videoSelfieData: Foundation.Data!, withProcessInfo processInfo: Foundation.Data!)
-  @objc dynamic public func vdVideoSelfieAllFinished(_ processFinished: Swift.Bool)
-}
-extension NuevaPlantillaViewController : VDPhotoSelfieCapture.VDPhotoSelfieCaptureProtocol {
-  @objc dynamic public func vdPhotoSelfieCaptured(_ photoSelfieData: Foundation.Data!, andFace face: Foundation.Data!)
-  @objc dynamic public func vdPhotoSelfieCaptured(withLiveDetection photoSelfieData: Foundation.Data!, andFace face: Foundation.Data!)
-  @objc dynamic public func vdPhotoSelfieAllFinished(_ processFinished: Swift.Bool)
 }
 @objc @_hasMissingDesignatedInitializers public class DangerAlertViewController : UIKit.UIViewController {
   @objc override dynamic public func viewDidLoad()
