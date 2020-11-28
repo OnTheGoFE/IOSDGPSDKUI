@@ -197,6 +197,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import ObjectiveC;
 @import UIKit;
 @import UserNotifications;
+@import VDDocumentCapture;
+@import VDPhotoSelfieCapture;
+@import VDVideoSelfieCapture;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -665,6 +668,29 @@ SWIFT_CLASS("_TtC12DIGIPROSDKUI28NuevaPlantillaViewController")
 
 
 
+
+
+
+@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <VDVideoSelfieCaptureProtocol>
+- (void)VDVideoSelfieCaptured:(NSData * _Null_unspecified)videoSelfieData;
+- (void)VDVideoSelfieCaptured:(NSData * _Null_unspecified)videoSelfieData withProcessInfo:(NSData * _Null_unspecified)processInfo;
+- (void)VDVideoSelfieAllFinished:(BOOL)processFinished;
+@end
+
+@class VDDocument;
+
+@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <VDDocumentCaptureProtocol>
+- (void)VDDocumentCaptured:(NSData * _Null_unspecified)imageData withCaptureType:(VDCaptureType)captureType andDocument:(NSArray<VDDocument *> * _Null_unspecified)document;
+- (void)VDDocumentAllFinished:(BOOL)processFinished;
+- (void)VDTimeWithoutPhotoTaken:(int32_t)seconds withCaptureType:(VDCaptureType)capture;
+@end
+
+
+@interface NuevaPlantillaViewController (SWIFT_EXTENSION(DIGIPROSDKUI)) <VDPhotoSelfieCaptureProtocol>
+- (void)VDPhotoSelfieCaptured:(NSData * _Null_unspecified)photoSelfieData andFace:(NSData * _Null_unspecified)face;
+- (void)VDPhotoSelfieCapturedWithLiveDetection:(NSData * _Null_unspecified)photoSelfieData andFace:(NSData * _Null_unspecified)face;
+- (void)VDPhotoSelfieAllFinished:(BOOL)processFinished;
+@end
 
 
 
